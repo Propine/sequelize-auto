@@ -41,6 +41,7 @@
   },
   "scripts": {
     "tsc": "tsc",
+    "prepare": "npm run build",
     "clean": "rimraf lib && rimraf types && rimraf **/models && rimraf *.tgz",
     "build": "npm run clean && tsc",
     "prepack": "crlf --set=LF bin/sequelize-auto",
@@ -50,8 +51,7 @@
     "test-mysql": "cross-env DEBUG='sequelize-auto:*' DIALECT=mysql nyc mocha",
     "test-sqlite": "cross-env DEBUG='sequelize-auto:*' DIALECT=sqlite nyc mocha",
     "test-mssql": "cross-env DEBUG='sequelize-auto:*' DIALECT=mssql nyc mocha",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "install": "npm run build"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "engines": {
     "node": ">= 10"

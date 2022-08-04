@@ -16,6 +16,7 @@ export class AutoWriter {
     caseFile?: CaseFileOption;
     caseModel?: CaseOption;
     caseProp?: CaseOption;
+    caseInitModelProp?: CaseOption;
     directory: string;
     lang?: LangOption;
     noAlias?: boolean;
@@ -163,7 +164,7 @@ export class AutoWriter {
     // return the models
     str += `\n${sp}return {\n`;
     modelNames.forEach(m => {
-      str += `${this.space[2]}${m}: ${m},\n`;
+      str += `${this.space[2]}${recase(this.options.caseInitModelProp, m)}: ${m},\n`;
     });
     str += `${sp}};\n`;
     str += '}\n';

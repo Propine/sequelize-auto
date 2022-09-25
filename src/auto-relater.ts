@@ -9,6 +9,8 @@ export class AutoRelater {
   caseModel: CaseOption;
   caseProp: CaseOption;
   singularize: boolean;
+  childPropDisableSingularize: boolean;
+
   pkSuffixes: string[];
 
   relations: Relation[];
@@ -18,6 +20,7 @@ export class AutoRelater {
     this.caseModel = options.caseModel || 'o';
     this.caseProp = options.caseProp || 'o';
     this.singularize = options.singularize;
+    this.childPropDisableSingularize = options.childPropDisableSingularize || false;
     this.pkSuffixes = options.pkSuffixes || [];
 
     if (!this.pkSuffixes || this.pkSuffixes.length == 0){
@@ -69,7 +72,7 @@ export class AutoRelater {
       parentProp: alias,
       parentTable: qNameJoin(spec.foreignSources.target_schema || schema, spec.foreignSources.target_table),
       childModel: modelName,
-      childProp: isOne ? singularize(childAlias) : pluralize(childAlias),
+      childProp: !this.childPropDisableSingularize && isOne ? singularize(childAlias) : pluralize(childAlias),
       childTable: qNameJoin(spec.foreignSources.source_schema || schema, spec.foreignSources.source_table),
       isOne: isOne,
       isM2M: false

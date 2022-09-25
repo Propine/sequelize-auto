@@ -135,6 +135,8 @@ export interface AutoOptions {
   caseModel?: CaseOption;
   /** Case of property names */
   caseProp?: CaseOption;
+  /** Case of the property in init-model function */
+  caseInitModelProp?: CaseOption;
   /** Close connection after export (default true) */
   closeConnectionAutomatically?: boolean;
   /** Database name */
@@ -167,6 +169,8 @@ export interface AutoOptions {
   schema?: string;
   /** Whether to singularize model names */
   singularize: boolean;
+  /** The prop is always plural */
+  childPropDisableSingularize?: boolean;
   /** Tables to skip exporting */
   skipTables?: string[];
   /** Fields to skip exporting */

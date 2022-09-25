@@ -746,7 +746,7 @@ export class AutoGenerator {
   private getEnumValues(fieldObj: TSField): string[] {
     if (fieldObj.special) {
       // postgres
-      return fieldObj.special.map((v) => `"${v}"`);
+      return fieldObj.special.map((v) => `"${v}"`).sort();
     } else {
       // mysql
       return fieldObj.type.substring(5, fieldObj.type.length - 1).split(',');
@@ -795,7 +795,7 @@ export class AutoGenerator {
   }
 
   private isNumber(fieldType: string): boolean {
-    return /^(smallint|mediumint|tinyint|int|bigint|float|money|smallmoney|double|decimal|numeric|real|oid)/.test(fieldType);
+    return /^(smallint|mediumint|tinyint|int|bigint|float|money|smallmoney|double|decimal|real|oid)/.test(fieldType);
   }
 
   private isBoolean(fieldType: string): boolean {
@@ -807,7 +807,7 @@ export class AutoGenerator {
   }
 
   private isString(fieldType: string): boolean {
-    return /^(char|nchar|string|varying|varchar|nvarchar|text|longtext|mediumtext|tinytext|ntext|uuid|uniqueidentifier|date|time|inet|cidr|macaddr)/.test(fieldType);
+    return /^(char|nchar|string|varying|varchar|nvarchar|text|longtext|mediumtext|tinytext|ntext|uuid|uniqueidentifier|date|time|inet|cidr|macaddr|numeric)/.test(fieldType);
   }
 
   private isArray(fieldType: string): boolean {

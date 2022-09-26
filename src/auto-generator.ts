@@ -325,7 +325,12 @@ export class AutoGenerator {
         }
 
         if (defaultVal === null || defaultVal === undefined) {
-          return true;
+          // Default value for "created_at" and "updated_at" column
+          if (fieldName in ["updated_at", "created_at"]) {
+            defaultVal = 'CURRENT_TIMESTAMP';
+          } else {
+            return true;
+          }
         }
         if (isSerialKey) {
           return true; // value generated in the database

@@ -326,7 +326,7 @@ export class AutoGenerator {
 
         if (defaultVal === null || defaultVal === undefined) {
           // Default value for "created_at" and "updated_at" column
-          if (fieldName in ["updated_at", "created_at"]) {
+          if (recase('c', field) === 'createdAt' || recase('c', field) === 'updatedAt') {
             defaultVal = 'CURRENT_TIMESTAMP';
           } else {
             return true;

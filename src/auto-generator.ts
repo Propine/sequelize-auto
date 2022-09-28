@@ -42,6 +42,7 @@ export class AutoGenerator {
     singularize: boolean;
     useDefine: boolean;
     noIndexes?: boolean;
+    underscored?: boolean;
   };
 
   constructor(tableData: TableData, dialect: DialectOptions, options: AutoOptions) {
@@ -224,6 +225,10 @@ export class AutoGenerator {
     str += space[2] + 'timestamps: ' + timestamps + ',\n';
     if (paranoid) {
       str += space[2] + 'paranoid: true,\n';
+    }
+
+    if (this.options.underscored) {
+      str += space[2] + 'underscored: true,\n';
     }
 
     // conditionally add additional options

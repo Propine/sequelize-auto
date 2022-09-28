@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Dialect, QueryInterface, QueryTypes, Sequelize } from "sequelize";
+import { ColumnsDescription, Dialect, QueryInterface, QueryTypes, Sequelize } from "sequelize";
 import { AutoOptions } from ".";
 import { ColumnElementType, ColumnPrecision, DialectOptions, FKRow, FKSpec, TriggerCount } from "./dialects/dialect-options";
 import { dialects } from "./dialects/dialects";
@@ -123,7 +123,16 @@ export class AutoBuilder {
 
   private async mapTable(table: Table) {
     try {
-      const fields = await this.queryInterface.describeTable(table.table_name, table.table_schema);
+      let fields = await this.queryInterface.describeTable(table.table_name, table.table_schema);
+      // Sort the field of table
+      fields = Object.keys(fields)
+        .sort()
+        .reduce((accumulator, key) => {
+          accumulator[key] = fields[key];
+
+          return accumulator;
+        }, {} as ColumnsDescription); 
+
       this.tableData.tables[makeTableQName(table)] = fields;
 
       // for postgres array or user-defined types, get element type

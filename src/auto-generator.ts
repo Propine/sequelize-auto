@@ -632,11 +632,11 @@ export class AutoGenerator {
     const fields = _.keys(this.tables[table]);
     return fields.filter((field): boolean => {
       const fieldObj = this.tables[table][field];
-      
+
       // createdAt and updatedAt is optional
-      if (recase('c', field) === 'createdAt' || recase('c', field) === 'updatedAt') {
-        return true;
-      }
+      // if (recase('c', field) === 'createdAt' || recase('c', field) === 'updatedAt') {
+      //   return true;
+      // }
 
       return (
         fieldObj.allowNull ||

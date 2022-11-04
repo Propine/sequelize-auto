@@ -264,16 +264,6 @@ export class AutoGenerator {
 
   // Create a string containing field attributes (type, defaultValue, etc.)
   private addField(table: string, field: string): string {
-    // ignore Sequelize standard fields
-    const additional = this.options.additional;
-    if (
-      additional &&
-      additional.timestamps !== false &&
-      (this.isTimestampField(field) || this.isParanoidField(field))
-    ) {
-      return '';
-    }
-
     if (this.isIgnoredField(field)) {
       return '';
     }
@@ -632,7 +622,7 @@ export class AutoGenerator {
     const fields = _.keys(this.tables[table]);
     return fields.filter((field): boolean => {
       const fieldObj = this.tables[table][field];
-      
+
       // createdAt and updatedAt is optional
       if (recase('c', field) === 'createdAt' || recase('c', field) === 'updatedAt') {
         return true;
